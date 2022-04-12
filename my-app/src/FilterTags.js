@@ -1,7 +1,15 @@
-import React from 'react'
+import {react, useState, createContext, useContext } from "react";
+
 
 export default function FilterTags() {
+
+  // const user1 = useContext(UserTest);
+  
   return (
-    <div>FilterTags</div>
+    <>
+ <h1>
+   hhhhhhhhhhhhhhhhhhhhhhhhhh
+ </h1>
+    </>
   )
 }

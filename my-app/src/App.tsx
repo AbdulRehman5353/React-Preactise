@@ -1,41 +1,75 @@
 import { useEffect,useState } from "react";
 import './App.css';
+import ContentModal from "./ContentModal";
 
-// const [dataApi, setDataApi] = useState("");
-
+import { Modal } from 'react-bootstrap';
 function App() {
-  
+
   const [dataApi, setDataApi] = useState([]);
+  const [dataApiId, setDataApiId] = useState();
+  const [ModalPreview, setModalPreview] = useState(false);
+  const [isLoadingTrue, setLoading] = useState(true);
 
   useEffect(()=> {
-    fetch('https://jsonplaceholder.typicode.com/photos')
+    fetch(`https://jsonplaceholder.typicode.com/photos`)
     .then(response => response.json())
-    .then(res =>  setDataApi(res) )
+    .then(res =>  loaderHandler(res) )
    },[])
 
-   console.log("data", dataApi)
+   const [show, setShow] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const loaderHandler = (res) => {
+     setShow(false)
+     setDataApi(res);
+        console.log(res);
+        setLoading(false);
+        
+    };
+   
+   const openModal = (APiId) => {
+  alert(APiId);
+  setDataApiId(APiId);
+  setShow(true);
+   }
 
  
-  const listItems = dataApi?.map((myList) =>  
+  const listItems = dataApi.map((myList) =>  
 
   <div className="col-md-3">
-  <div className="card">
+  <div className="card" key={myList.id} >
     <img src={myList.url} className="card-img-top" alt="..."/>
     <div className="card-body">
-      <h5 className="card-title">{myList.splice(2, 0)}</h5>
-      <h1 className="card-title">{myList.id}</h1>
+      <h5 className="card-title">{myList.title}</h5>
+      
       <p className="card-text "  >This is a longer card This content is a little bit longer.</p>
+      <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+       View Detail
+      </button>
     </div>
   </div>
 </div>
 
 );  
   return (
-    <div className="container">
-      <div className="row row-cols-1 row-cols-md-2 g-4">
-{listItems}
+    <>
+    <div className="container mt-5 ">
+      
+      { isLoadingTrue ? 
+(    <div className="loader mt-5 pt-5">
+<div className="spinner-border " role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+</div>)
+     : 
+   (
+    <><ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal><div className="row row-cols-1 row-cols-md-2 g-4">
+            {listItems}
+          </div></>
+   )
+      }
   </div>
-  </div>
+  </>
   );
 }
 

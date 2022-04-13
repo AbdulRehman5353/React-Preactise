@@ -7,13 +7,16 @@ function App() {
 
   const [dataApi, setDataApi] = useState([]);
   const [dataApiId, setDataApiId] = useState();
-  const [ModalPreview, setModalPreview] = useState(false);
-  const [isLoadingTrue, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
+  const [deleteState, setDeleteState] = useState({});
 
   useEffect(()=> {
     fetch(`https://jsonplaceholder.typicode.com/photos`)
     .then(response => response.json())
     .then(res =>  loaderHandler(res) )
+
+
+
    },[])
 
    const [show, setShow] = useState(false);
@@ -28,17 +31,28 @@ function App() {
     };
    
    const openModal = (APiId) => {
-  alert(APiId);
   setDataApiId(APiId);
   setShow(true);
+   }
+   const DeleteItem = (APiId) => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${APiId}`, { method: 'DELETE' })
+    .then(() => alert("ddssshoy"));
+    setDataApi(dataApi.filter(item=>item.id!==APiId))
    }
 
  
   const listItems = dataApi.map((myList) =>  
 
   <div className="col-md-3">
-  <div className="card" key={myList.id} >
+  <div className="card" key={myList.id} > 
+   <div className="card-header d-flex justify-content-between">
+  <h6>{myList.id}</h6> 
+   </div>
+   <div className="card-img-area">
+
     <img src={myList.url} className="card-img-top" alt="..."/>
+  <div onClick={() => DeleteItem(myList.id)}><i className="fa fa-times fa-icons" aria-hidden="true"></i></div>
+   </div>
     <div className="card-body">
       <h5 className="card-title">{myList.title}</h5>
       
@@ -55,8 +69,8 @@ function App() {
     <>
     <div className="container mt-5 ">
       
-      { isLoadingTrue ? 
-(    <div className="loader mt-5 pt-5">
+      { isLoading ? 
+(<div className="loader mt-5 pt-5">
 <div className="spinner-border " role="status">
   <span className="visually-hidden">Loading...</span>
 </div>

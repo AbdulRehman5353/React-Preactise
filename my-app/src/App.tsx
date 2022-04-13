@@ -1,8 +1,11 @@
 import { useEffect,useState } from "react";
 import './App.css';
 import ContentModal from "./ContentModal";
+import FormModal from "./FormModal.tsx";
 
-import { Modal } from 'react-bootstrap';
+
+
+
 function App() {
 
   const [dataApi, setDataApi] = useState([]);
@@ -61,6 +64,10 @@ function App() {
        View Detail
       </button>
     </div>
+    <div className="mb-3">
+  <label htmlFor="formFile" class="form-label">Default file input example</label>
+    <input className="form-control" type="file" id="formFile"/>
+</div>
   </div>
 </div>
 
@@ -77,7 +84,11 @@ function App() {
 </div>)
      : 
    (
-    <><ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal><div className="row row-cols-1 row-cols-md-2 g-4">
+    <>
+    <FormModal ></FormModal>
+    <ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal>
+    
+    <div className="row row-cols-1 row-cols-md-2 g-4">
             {listItems}
           </div></>
    )

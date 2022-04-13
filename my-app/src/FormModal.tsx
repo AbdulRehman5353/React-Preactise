@@ -1,25 +1,32 @@
-import React from 'react'
+import React from 'react';
+import Modal from 'react-bootstrap/Modal';
 
 export default function FormModal() {
   return (
-<Form>
-  <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-    <Form.Label column sm="2">
-      Email
-    </Form.Label>
-    <Col sm="10">
-      <Form.Control plaintext readOnly defaultValue="email@example.com" />
-    </Col>
-  </Form.Group>
+    <Modal show={false} >
+    <Modal.Header closeButton>
+    </Modal.Header>
 
-  <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-    <Form.Label column sm="2">
-      Password
-    </Form.Label>
-    <Col sm="10">
-      <Form.Control type="password" placeholder="Password" />
-    </Col>
-  </Form.Group>
-</Form>
+  
+    <Modal.Body>
+    <form>
+  <div className="mb-3">
+    <label htmlFor="exampleInputEmail1" className="form-label">Title</label>
+    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+  </div>
+  <div className="mb-3">
+    <label htmlFor="exampleInputPassword1" className="form-label">Text</label>
+    <input type="password" className="form-control" id="exampleInputPassword1"/>
+  </div>
+<div className="d-flex justify-content-end">
+  
+<button type="submit" className="btn btn-primary">Submit</button>
+</div>
+</form>
+   </Modal.Body> 
+    <Modal.Footer>
+
+    </Modal.Footer>
+  </Modal>
   )
 }

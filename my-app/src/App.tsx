@@ -16,7 +16,7 @@ function App() {
   useEffect(()=> {
     fetch(`https://jsonplaceholder.typicode.com/photos`)
     .then(response => response.json())
-    .then(res =>  loaderHandler(res) )
+    .then(res =>  loaderHandler(res))
 
 
 
@@ -60,14 +60,16 @@ function App() {
       <h5 className="card-title">{myList.title}</h5>
       
       <p className="card-text "  >This is a longer card This content is a little bit longer.</p>
-      <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+   <div className="card-footer d-flex justify-content-between">
+   <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
        View Detail
       </button>
+   <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+       Edit Detail
+      </button>
+   </div>
     </div>
-    <div className="mb-3">
-  <label htmlFor="formFile" class="form-label">Default file input example</label>
-    <input className="form-control" type="file" id="formFile"/>
-</div>
+
   </div>
 </div>
 
@@ -85,11 +87,15 @@ function App() {
      : 
    (
     <>
+               {/* <div>
+<span className="warn warning"></span>
+</div> */}
     <FormModal ></FormModal>
     <ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal>
     
     <div className="row row-cols-1 row-cols-md-2 g-4">
             {listItems}
+ 
           </div></>
    )
       }

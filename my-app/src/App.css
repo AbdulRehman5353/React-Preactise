@@ -23,9 +23,9 @@
   }
   .card-img-area .fa-icons {
     position: absolute;
-top: 10px;
-right: 10px;      
-}
+    top: 10px;
+    right: 10px;      
+    }
 .test:after {
   content: ' \01C3';
   color: white;

@@ -1,17 +1,29 @@
 import { useEffect,useState } from "react";
 import './App.css';
 import ContentModal from "./ContentModal";
-import FormModal from "./FormModal.tsx";
+// import FormModal from "./FormModal.tsx";
 
 
+interface IParams{
+  albumId?: number,
+  id?: number,
+  thumbnailUrl: string,
+  title: string,
+  url?:string,
+}
 
+const EmptyData = {
+  thumbnailUrl: "",
+  title: "",
+}
 
 function App() {
 
   const [dataApi, setDataApi] = useState([]);
   const [dataApiId, setDataApiId] = useState();
   const [isLoading, setLoading] = useState(true);
-  const [deleteState, setDeleteState] = useState({});
+  const [contactInfo, setContactInfo] = useState<IParams>(EmptyData);
+
 
   useEffect(()=> {
     fetch(`https://jsonplaceholder.typicode.com/photos`)
@@ -87,16 +99,18 @@ function App() {
      : 
    (
     <>
-               {/* <div>
-<span className="warn warning"></span>
-</div> */}
-    <FormModal ></FormModal>
+    <div>
+    <span className="warn warning"></span>
+    </div>
+    {/* <FormModal contactInfo={contactInfo} setContactInfo={setContactInfo} showModalContent={true} ></FormModal> */}
     <ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal>
     
-    <div className="row row-cols-1 row-cols-md-2 g-4">
+    {/* <div className="row row-cols-1 row-cols-md-2 g-4">
             {listItems}
  
-          </div></>
+          </div> */}
+          
+          </>
    )
       }
   </div>

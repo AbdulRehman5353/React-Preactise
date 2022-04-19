@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
 import './App.css';
 import ContentModal from "./ContentModal";
-// import FormModal from "./FormModal.tsx";
+import FormModal from "./FormModal.tsx";
 
 
 interface IParams{
@@ -21,6 +21,7 @@ function App() {
 
   const [dataApi, setDataApi] = useState([]);
   const [dataApiId, setDataApiId] = useState();
+  const [inputForm, setInputForm] = useState(false)
   const [isLoading, setLoading] = useState(true);
   const [contactInfo, setContactInfo] = useState<IParams>(EmptyData);
 
@@ -76,7 +77,7 @@ function App() {
    <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
        View Detail
       </button>
-   <button type="button" className="btn btn-primary" onClick={() => openModal(myList.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+   <button type="button" className="btn btn-primary" onClick={() => setInputForm(true)} data-bs-toggle="modal" data-bs-target="#exampleModal">
        Edit Detail
       </button>
    </div>
@@ -102,13 +103,13 @@ function App() {
     <div>
     <span className="warn warning"></span>
     </div>
-    {/* <FormModal contactInfo={contactInfo} setContactInfo={setContactInfo} showModalContent={true} ></FormModal> */}
+    <FormModal contactInfo={contactInfo} setContactInfo={setContactInfo} showModalContent={inputForm} handleClose={setInputForm} ></FormModal>
     <ContentModal modalShow={show} modalClose={handleClose} dataApiIds={dataApiId}></ContentModal>
     
-    {/* <div className="row row-cols-1 row-cols-md-2 g-4">
+    <div className="row row-cols-1 row-cols-md-2 g-4">
             {listItems}
  
-          </div> */}
+          </div>
           
           </>
    )
